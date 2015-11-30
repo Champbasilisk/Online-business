@@ -6,7 +6,7 @@
 <form class="form-horizontal my-form" id="formPay">
   <div class="form-group">
     <label class="col-sm-2 control-label" style="color:#000;">Slip Image</label>
-    <div class="col-sm-9">
+    <div class="col-sm-4">
       <div class="input-group"><span class="input-group-addon btn btn-file"> Browse&hellip;
         <input type="file" name="payImage" id="payImage" accept="image/*" />
         </span>
@@ -22,7 +22,7 @@
    <div class="form-group">
     <label class="col-sm-2 control-label"></label>
     <div class="col-sm-5" align="left">
-      <div><input type="submit" class="btn btn-go" value="OK" id="con-ok" style="display:none"/></div>
+      <div><input type="submit" class="btn btn-go" value="OK" id="con-ok"/></div>
     </div>
   </div>
 </form>

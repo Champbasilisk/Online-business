@@ -1,6 +1,5 @@
 // JavaScript Document
 function clearFile() {
-	document.getElementById('fileName').value='';
 	document.getElementById('fileUpload').value='';
 	document.getElementById('uploadPreview').style.display = "none";
 	document.getElementById('ImagePreview').style.display = "none";

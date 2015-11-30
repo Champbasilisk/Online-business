@@ -11,54 +11,7 @@ function loadXMLDoc(url,cfunc){
 	xmlhttp.send();
 }
 
-$(document).ready( function() {
-	$('#user').bind('keypress', function(e) {
-    	//space bar
-        if (e.which == 32){
-        	e.preventDefault();
-        }
-    });
-	$('#pass').bind('keypress', function(e) {
-    	//space bar
-        if (e.which == 32){
-        	e.preventDefault();
-        }
-    });
-	$('#firstname').bind('keypress', function(e) {
-    	//space bar
-        if (e.which == 32){
-        	e.preventDefault();
-        }
-    });
-	$('#lastname').bind('keypress', function(e) {
-    	//space bar
-        if (e.which == 32){
-        	e.preventDefault();
-        }
-    });
-	$('#email').bind('keypress', function(e) {
-    	//space bar
-        if (e.which == 32){
-        	e.preventDefault();
-        }
-    });
-	$("#phone").keydown(function (e) {
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-            (e.keyCode == 65 && ( e.ctrlKey === true || e.metaKey === true ) ) || 
-            (e.keyCode >= 35 && e.keyCode <= 40)) {
-                 return;
-        }
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
-    });
-	$('#postcode').bind('keypress', function(e) {
-    	//space bar
-        if (e.which == 32 || e.which == 45){
-        	e.preventDefault();
-        }
-    });
-});
+
 function checkLogin(){
 	var userLogin = document.getElementById('userLogin').value;
 	var passLogin = document.getElementById('passLogin').value;
@@ -434,7 +387,7 @@ $(document).on("click", "#btn-add2cart", function () {
 			$('#showCartView').load('cart-view.php');
 			$('.numberCircle').load('count-show.php');
 			$('#myModal').modal('hide');
-			document.getElementById('showa2c').innerHTML = return_data;	
+			document.getElementById('showa2c').innerHTML = "Add to cart Successful";	
 	    }
     }
 });
@@ -546,10 +499,10 @@ $("#formPay").on('submit',(function(e) {
 		processData:false,
 		success: function(data)
 		{
-			$("#targetLayer").html(data);
+			jQuery("#statusConfirm").modal('show');
+			document.getElementById('showConfirm').innerHTML = data;
 			$('div#pageContent').load('member-order-view.php');
 			$('#pageContent').css('display', 'block').hide().fadeIn();
-			document.getElementById('slipName').value='';
 			document.getElementById('payImage').value='';
 			document.getElementById('PayPreview').style.display = "none";
 			document.getElementById('imgPre').style.display = "none";
@@ -557,7 +510,176 @@ $("#formPay").on('submit',(function(e) {
 		}	        
 	});
 }));
-	
+
+$("#formAddProduct").on('submit',(function(e) {
+	e.preventDefault();
+	$.ajax({
+		url: "add-product-insert.php",
+		type: "POST",
+		data:  new FormData(this),
+		contentType: false,
+    	cache: false,
+		processData:false,
+		success: function(data)
+		{
+			jQuery("#statusAddPro").modal('show');
+			document.getElementById('showAddPro').innerHTML = data;
+			document.getElementById('formAddProduct').reset();
+			$('div#manageContent').load('all-product-show.php');
+			$('#manageContent').css('display', 'block').hide().fadeIn();
+			$('#AddContent').hide();
+		}	        
+	});
+}));
+
+$(document).on("click", "#del-pro", function () {
+	var proid = $(this).data('id');
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("POST","admin-del-product.php",true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send("proid="+proid);
+    xmlhttp.onreadystatechange = function() {
+	    if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			var return_data = xmlhttp.responseText;
+			jQuery("#statusManage").modal('show');
+			document.getElementById('showManage').innerHTML = return_data;
+			$('div#manageContent').load('all-product-show.php');
+	    }
+    }
+});
+
+$(document).on("click", "#edit-pro", function () {
+	var proid = $(this).data('id');
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("POST","admin-edit-product.php",true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send("proid="+proid);
+    xmlhttp.onreadystatechange = function() {
+	    if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			var return_data = xmlhttp.responseText;
+			jQuery("#addAmonut").modal('show');
+			document.getElementById('addAmonut').innerHTML = return_data;
+	    }
+    }
+});
+
+$(document).on("click", "#addAmountPro", function () {
+	var proid = $(this).data('id');
+	var amount = $("#amount2").val();
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("POST","admin-edit-product-save.php",true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send("proid="+proid+"&amount="+amount);
+    xmlhttp.onreadystatechange = function() {
+	    if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			var return_data = xmlhttp.responseText;
+			$('#addAmonut').modal('hide');
+			jQuery("#statusaddAmonut").modal('show');
+			document.getElementById('showaddstatus').innerHTML = return_data;
+			$('div#manageContent').load('all-product-show.php');
+	    }
+    }
+});
+
+$(document).on("click", "#checkPay", function () {
+	var orid = $(this).data('id');
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("POST","admin-order-payImg.php",true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send("orid="+orid);
+    xmlhttp.onreadystatechange = function() {
+	    if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			var return_data = xmlhttp.responseText;
+			jQuery("#statusPayImg").modal('show');
+			document.getElementById('showPayImg').innerHTML = return_data;
+	    }
+    }
+});
+
+$(document).on("click", "#conPay", function () {
+	var orid = $(this).data('id');
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("POST","admin-order-confirm.php",true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send("orid="+orid);
+    xmlhttp.onreadystatechange = function() {
+	    if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			var return_data = xmlhttp.responseText;
+			jQuery("#statusPayConf").modal('show');
+			document.getElementById('showPayConf').innerHTML = return_data;
+			$('div#orderContent').load('admin-order-view-pay.php');
+			$('#orderContent').css('display', 'block').hide().fadeIn();
+	    }
+    }
+});
+
+$(document).on("click", "#rejPay", function () {
+	var orid = $(this).data('id');
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("POST","admin-order-reject.php",true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send("orid="+orid);
+    xmlhttp.onreadystatechange = function() {
+	    if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			var return_data = xmlhttp.responseText;
+			jQuery("#statusPayConf").modal('show');
+			document.getElementById('showPayConf').innerHTML = return_data;
+			$('div#orderContent').load('admin-order-view-pay.php');
+			$('#orderContent').css('display', 'block').hide().fadeIn();
+	    }
+    }
+});
+
+function findIt(){
+	var orid = $("#orderID").val();
+	var return_data = ""
+	if(orid==""){
+		return_data = "Enter your order id.";
+	}else{
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("POST","find-order-show.php",true);
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp.send("orid="+orid);
+		xmlhttp.onreadystatechange = function() {
+			if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				return_data = xmlhttp.responseText;
+				document.getElementById('showFindit').innerHTML = return_data;
+	$('#showFindit').css('display', 'block').hide().fadeIn();
+			}
+		}
+	}
+	document.getElementById('showFindit').innerHTML = return_data;
+	$('#showFindit').css('display', 'block').hide().fadeIn();
+}
+
+$(document).on("click", "#viewList2", function () {
+	var orid = $(this).data('id');
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("POST","member-order-view-list.php",true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send("orid="+orid);
+    xmlhttp.onreadystatechange = function() {
+	    if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+		    var return_data = xmlhttp.responseText;
+			jQuery("#ListView2").modal('show');
+			document.getElementById('showList2').innerHTML = return_data;
+	    }
+    }
+});
+
+$(document).on("click", "#confirm2", function () {
+	var orid = $(this).data('id');
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("POST","confirm-order-id.php",true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send("orid="+orid);
+    xmlhttp.onreadystatechange = function() {
+	    if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			$('#payContent2').css('display', 'block').hide().fadeIn();
+			$('#payContent2').slideDown();
+	    }
+    }
+});
 //-----------------------------------------------------------------------//
 
 //-----------------------------------------------------------------------//

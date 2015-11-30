@@ -26,7 +26,7 @@ include("config/connect.php");
 		$Total = $_SESSION["listAmount"][$i] * $objResult["pro_price"];
 		$totalItem+=$_SESSION["listAmount"][$i];
 		$totalValue[$i] = $Total;
-		$SumTotal = $SumTotal + $Total;
+		$SumTotal+= $Total;
 		$_SESSION['sumtotal'] = $SumTotal;	
 		$count+=1;
 		$_SESSION["Count"] = $count;
@@ -69,7 +69,7 @@ include("config/connect.php");
     	<td colspan="2" class="no-border"></td>
     	<td colspan="2" align="left" class="order-total">Order total</td>
         <input type="hidden" id="sumtotal" value="<?php echo $SumTotal?>">
-        <td align="right" class="order-total"><?php echo number_format($_SESSION['sumtotal']);?> THB</td>
+        <td align="right" class="order-total"><?php echo number_format($SumTotal);?> THB</td>
    	</tr>
     <tr>
     	<td colspan="2" class="no-border"></td>

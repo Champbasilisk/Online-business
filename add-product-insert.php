@@ -13,8 +13,7 @@
 	$model = $_POST['model'];		
 	$price = $_POST['price'];		
 	$amount = $_POST['amount'];
-	
-	echo ("input brand : ".$brand."\nmodel = ".$model."\n");	
+		
 	$filename="";	
 	if($_FILES["fileUpload"]["error"]>0){
 		echo "Return Code : " . $_FILES["fileUpload"]["error"] . "<br>";
@@ -64,12 +63,7 @@
 			die('Error : '.mysqli_error($conn));
 		}			
 	}	
-?>
-<script type="text/javascript">
-	alert("Success");
-</script>
-<?php
-	echo "<meta http-equiv='refresh' content='0;url=index.php#admin_page'>";
+	echo "Add product successful.";
 	mysqli_free_result($result);
 	mysqli_close($conn);	
 ?>

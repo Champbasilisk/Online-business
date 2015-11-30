@@ -18,9 +18,12 @@ function showExistingBrandForm(){
 	
 }
 </script>
-<form class="form-horizontal my-form" role="form" name="formAddProduct" id="formAddProduct" method="post" action="add-product-insert.php" enctype="multipart/form-data">
-	<div class="form-group" id="Product Brand" style="display:">
-		<label class="col-sm-2 control-label"  >Product Brand</label>
+<div class="col-sm-12">
+	<h3 style="font-weight:bold;text-transform:uppercase;">add product</h3>
+</div>
+<form class="form-horizontal my-form" id="formAddProduct">
+	<div class="form-group" id="Product Brand">
+		<label class="col-sm-2 control-label" >Product Brand</label>
 		<div class="col-sm-9">
 			<div class="form-group">
                 <div class="col-sm-12">
@@ -28,7 +31,7 @@ function showExistingBrandForm(){
                         <div class="col-sm-6">
                             <div class="input-group">
                                <span class="input-group-addon"><strong>Existing Brand</strong></span>
-                               <select class="form-control" name="oldBrand" id="oldBrand" onchange="check_newBrand()">
+                               <select class="form-control" name="oldBrand" id="oldBrand">
                                		<option value="0">--Select Brand--</option>;
 <?php 
 									$index = 0;
@@ -39,24 +42,17 @@ function showExistingBrandForm(){
 											<option value="<?php echo $data['pro_brand'] ?>"><?php echo $data['pro_brand']?></option>;
 <?php 									
 											$index++;
-											
 										}
 									}
 									mysqli_free_result($result);
 									mysqli_close($conn);	
 ?>
-									<!--
-                               		<option value="0">--Select Brand--</option>
-                               		<option value="Casio">Casio</option>
-                                    <option value="Diesel">Diesel</option>
-                               		<option value="Daniel Wellington">Daniel Wellington</option>
-                                    -->
                                </select>
                         	</div>
                         </div><!-- /col-sm-5 -->
                         <div class="col-sm-6">
                             <div class="input-group" >
-                                <input type="button" id="btn-newBrand" class="btn btn-save" value="New Brand" onclick="showNewBrandForm()"/>
+                                <input type="button" id="btn-newBrand" class="btn btn-save" value="New Brand" onclick="showNewBrandForm();"/>
                             </div>
                         </div><!-- /col-sm-5 -->
                     </div> <!-- /nested form-group acting like row -->
@@ -159,7 +155,7 @@ function showExistingBrandForm(){
                         <div class="col-sm-5">
                         	<div class="input-group">
                             	<span class="input-group-addon"><strong>THB</strong></span>
-                                <input class="form-control" type="number" min="0" placeholder="Price" name="price" id="price">
+                                <input class="form-control" type="number" min="0" placeholder="Price" name="price" id="price" required="required">
                                 <span class="input-group-addon"><strong>.00</strong></span>
                             </div>
                         </div><!-- /col-sm-6 -->
@@ -174,19 +170,18 @@ function showExistingBrandForm(){
 		<div class="col-sm-3">
 			<div class="input-group">
             	<span class="input-group-addon"><i class="fa fa-terminal fa-fw"></i></span>
-            	<input class="form-control" type="number" min="0" placeholder="Amount" name="amount" id="amount">
+            	<input class="form-control" type="number" min="0" placeholder="Amount" name="amount" id="amount" required="required">
             </div>
 		</div><!-- /col-sm-9 -->
 	</div><!-- /form-group -->
     
     <div class="form-group">
 		<label class="col-sm-2 control-label">Product Image</label>
-        <div class="col-sm-9">
+        <div class="col-sm-4">
         	<div class="input-group">
             	<span class="input-group-addon btn btn-file">
-                	Browse&hellip;<input type="file" name="fileUpload" id="fileUpload" accept="image/*" />
+                	Browse&hellip;<input type="file" name="fileUpload" id="fileUpload" accept="image/*" required="required"/>
                 </span>
-            	<input type="text" class="form-control" name="fileName" id="fileName" value="" readonly>
                 <span class="input-group-addon btn btn-clear" onclick="clearFile();">Clear</span>
       		</div> 
         </div>
@@ -199,6 +194,10 @@ function showExistingBrandForm(){
 		</div><!-- /col-sm-9 -->
 	</div><!-- /form-group -->
     <!--<a href="#add_product" class="btn btn-new-product btn-xl">New Product</a>-->
-    <input type="button" class="btn btn-new-product btn-xl" value="New Product" onclick="check_addProduct()" />
-    <a href="#add_product" class="btn btn-cancel btn-xl" onclick="hideAddProductOnClick()">Cancel</a>
+    <div class="form-group" id="newPro-btn">
+		<label class="col-sm-2 control-label"></label>
+		<div class="col-sm-5" align="left">
+			<input type="submit" class="btn btn-new-product" value="New Product"/>
+		</div><!-- /col-sm-9 -->
+	</div><!-- /form-group -->
 </form>

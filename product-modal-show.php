@@ -78,7 +78,9 @@ table tr td{
                   <div class="col-sm-10">
                     <div class="input-group"> <span class="input-group-addon"><i class="fa fa-terminal fa-fw"></i></span>
                       
-                      <input class="form-control" type="number" min="0" placeholder="Amount" name="amount" id="amount" onChange="handleAmount(this);">
+                      <input class="form-control" type="number" min="0" placeholder="Amount" name="amount" id="amount" 
+                      	onChange="if(this.value<0){this.value='0';}"
+                      >
                     </div>
                   </div><!-- /col-sm-9 --> 
                 </div><!-- /form-group --> 

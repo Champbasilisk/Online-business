@@ -33,6 +33,12 @@ session_start();
 		$("#mem_page").slideDown();
 		$("#register").hide();
 	}
+	function showFind() {
+		$("#find_order").slideDown("slow");
+	}
+	function hideFind() {
+		$("#find_order").slideUp("slow");
+	}
 	function showPurchase() {
 		$('div#pageContent').load('member-order-view.php');
 		$("#mem_page").slideDown();
@@ -43,7 +49,64 @@ session_start();
 		document.getElementById('contact').style.backgroundColor = "#FFF";
 		document.getElementById('contact').style.color = "#000";
 	}
-	
+	$(document).ready( function() {
+	$('#user').bind('keypress', function(e) {
+    	//space bar
+        if (e.which == 32){
+        	e.preventDefault();
+        }
+    });
+	$('#pass').bind('keypress', function(e) {
+    	//space bar
+        if (e.which == 32){
+        	e.preventDefault();
+        }
+    });
+	$('#firstname').bind('keypress', function(e) {
+    	//space bar
+        if (e.which == 32){
+        	e.preventDefault();
+        }
+    });
+	$('#lastname').bind('keypress', function(e) {
+    	//space bar
+        if (e.which == 32){
+        	e.preventDefault();
+        }
+    });
+	$('#email').bind('keypress', function(e) {
+    	//space bar
+        if (e.which == 32){
+        	e.preventDefault();
+        }
+    });
+	$("#phone").keydown(function (e) {
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            (e.keyCode == 65 && ( e.ctrlKey === true || e.metaKey === true ) ) || 
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+                 return;
+        }
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+	$('#postcode').bind('keypress', function(e) {
+    	//space bar
+        if (e.which == 32 || e.which == 45){
+        	e.preventDefault();
+        }
+    });
+	$("#idcard").keydown(function (e) {
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            (e.keyCode == 65 && ( e.ctrlKey === true || e.metaKey === true ) ) || 
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+                 return;
+        }
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+});
 </script>
 <title>occasion watch</title>
 </head>
@@ -64,6 +127,7 @@ session_start();
               <li><a class="page-scroll" href="#page-top">Home</a></li>
               <li><a class="page-scroll" href="#services">Services</a></li>
               <li><a class="page-scroll" href="#product">Product</a></li>
+              <li><a class="page-scroll" href="#find_order" onclick="showFind();">Find Order</a></li>
               <li><a class="page-scroll" href="#contact">Contact</a></li>
               <li><a class="page-scroll" href="#checkout" onClick="showCheckout();"><?PHP include("cart-nav.php")?></a></li>
             </ul> 
@@ -93,6 +157,7 @@ session_start();
             </div>
           </div>
         </div>
+        
     </nav>
 	<?PHP if($_SESSION['mem_name']=="admin_"){ ?>
 			<script>
@@ -102,6 +167,13 @@ session_start();
 				$('#product').hide();
 				$('#Proside').hide();
 				$('#contact').hide();
+				$('#common-nav').hide();
+            });
+            </script>
+	<?PHP }else{ ?>
+			<script>
+			$(document).ready(function() {
+                $('#admin_page').hide();
             });
             </script>
 	<?PHP } ?>
@@ -125,6 +197,17 @@ session_start();
         </div>
     </section>
     
+    <section class="bg-primary" id="find_order" style="display:none; padding-top:35px;">
+        <div class="profile no-padding">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                	<h2 class="section-heading">Find order</h2>
+                    <hr class="light">
+                    <?PHP include("find-order.php");?> 
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="bg-primary" id="register" style="display:none;padding-top:35px;">
         <div class="container">
             <div class="row">
@@ -211,7 +294,7 @@ session_start();
         <?PHP include("contact.php");?>
     </section>
     
-    <section class="bg-primary" id="admin_page" style="padding-top:35px;">
+    <section class="bg-primary" id="admin_page" style="padding-top:70px;">
      	<div class="admin">
             <div class="row">
                 <div class="col-lg-12 text-center">

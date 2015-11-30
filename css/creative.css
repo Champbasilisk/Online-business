@@ -512,6 +512,7 @@ input[readonly] {
   color:white;
   text-transform:uppercase;
   border:1px solid #2bbedb;
+  border-radius:4px;
   transition:all ease 0.4s;
 }
 .btn-new-product:hover {

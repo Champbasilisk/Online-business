@@ -99,7 +99,7 @@
 
 <!-- Modal add2cart -->
   <div class="modal fade" id="addtocartStatus" role="dialog" data-backdrop="static" data-keyboard="false" style="color:#000;">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" style="text-transform:uppercase; font-weight:bold;" align="center"><i class="fa fa-cart-plus fa-2x"></i>  List in order</h4>

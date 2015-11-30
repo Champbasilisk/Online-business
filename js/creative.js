@@ -62,4 +62,7 @@
     	jQuery(this).remove();
 		jQuery(this).data('modal', null);
 	});
-	
+	jQuery('#ListView').on('hidden',function(e){
+    	jQuery(this).remove();
+		jQuery(this).data('modal', null);
+	});

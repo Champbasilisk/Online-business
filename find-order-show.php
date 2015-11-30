@@ -1,15 +1,15 @@
 <?PHP 
 session_start();
 include('config/connect.php');
-$mem_id = $_SESSION['mem_id'];
-$sql = "select * from orders where orders.mem_id = '$mem_id' order by or_id desc";
+$orid = $_POST['orid'];
+$sql = "select * from orders where orders.or_id = $orid";
 if (!$result=mysqli_query($conn,$sql)){
 	die('Error: ' . mysqli_error($conn));
 }
 if(mysqli_num_rows($result)==0){
 	echo "<div class='col-sm-12'>
         	<div class='row'>
-            	<div class='col-sm-2'><h3 class='uppercase'>Purchase</h3></div>
+            	<div class='col-sm-2'><h3 class='uppercase'>You Order</h3></div>
             </div>
         </div>
         <table class='table table-hover' style='font-size:15px;'>
@@ -26,9 +26,9 @@ if(mysqli_num_rows($result)==0){
 }else{?>
 		<div class="col-sm-12">
         	<div class="row">
-            	<div class="col-sm-2"><h3 class="uppercase">Purchase</h3></div>
+            	<div class="col-sm-2"><h3 class="uppercase">You Order</h3></div>
                 <div class="col-sm-10 no-padding" align="right">
-                 	
+                 
                 </div>
             </div>
         </div>
@@ -49,12 +49,11 @@ if(mysqli_num_rows($result)==0){
 		<tr>
         	<td class="order-id"><?PHP echo $data['or_id']; ?></td>
         	<td><?PHP echo $newDate; ?></td>
-            <td><a class="btn link-btn" id="viewList" data-id="<?PHP echo $data['or_id']; ?>">View List</a></td>
+            <td><a class="btn link-btn" id="viewList2" data-id="<?PHP echo $data['or_id']; ?>">View List</a></td>
             <td><?PHP echo $data['or_sum']; ?></td>
 	<?PHP 	if($data['or_status']=='No'){?>
             <td style="font-weight:bold;color:#F05F04;">
 				<?PHP echo $data['or_status']; ?>
-             	<a class="btn-confirm" id="confirm" data-id="<?PHP echo $data['or_id']; ?>">(confirm)</a>
             </td>
     <?PHP 	}if($data['or_status']=='Waiting'){?>
      		<td style="font-weight:bold;color:#999;">

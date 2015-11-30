@@ -88,3 +88,21 @@
     </div>
   </div>
 <!--/ModalUpdate -->
+
+<!-- Modal Confirm-->
+  <div class="modal fade" id="statusConfirm" role="dialog" data-backdrop="static" data-keyboard="false" style="color:#000;">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" style="text-transform:uppercase; font-weight:bold;" align="center">Payment</h4>
+        </div>
+        <div class="modal-body text-alert" id="showConfirm" align="center">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--/Modal Confirm -->

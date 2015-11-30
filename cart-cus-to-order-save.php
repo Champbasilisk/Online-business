@@ -45,6 +45,6 @@
 		unset($_SESSION["sumtotal"]);
 		unset($_SESSION["intLine"]);
 		unset($_SESSION["listPrice"]);
-		echo "Order successfully";
+		echo "Order successfully.<br>Your order id is ".$OrderID;
 	}
 ?>

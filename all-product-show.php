@@ -8,6 +8,9 @@
 	if(mysqli_num_rows($result) == 0){
 		echo "There is no data";
 	}else{?> 
+    <div class="col-sm-12" align="center">
+    	<h3 style="font-weight:bold;text-transform:uppercase;">All product</h3>
+    </div>
     	<div class="col-lg-12 no-padding">
         	<div class="row">
             <div class="col-lg-12 no-padding" style="background-color:#FFF;">
@@ -21,8 +24,8 @@
                 <td>pro_strap</td>
                 <td>pro_price</td>
                 <td>pro_amount</td>
-                <td>menu1</td>
-                <td>menu2</td>
+                <td>Add/Red.</td>
+                <td>Delete</td>
             </tr>		
 		<?PHP
 		while($data=mysqli_fetch_array($result, MYSQLI_ASSOC)){
@@ -36,8 +39,8 @@
                 <td><?PHP echo $data['pro_strap']?></td>
                 <td><?PHP echo $data['pro_price']?></td>
                 <td><?PHP echo $data['pro_amount']?></td>
-                <td><a href="#" onClick="return confirm('Are you sure want to edit?')">Edit</a></td>
-                <td><a href="#" onClick="return confirm('Are you sure want to delete?')">Delete</a></td>
+                <td align="center"><a data-id="<?PHP echo $data['pro_id']?>" id="edit-pro">Edit</a></td>
+                <td align="center"><a data-id="<?PHP echo $data['pro_id']?>" id="del-pro">Delete</a></td>
             </tr>
      
 <?PHP } ?>
@@ -49,5 +52,7 @@
 	}
 	mysqli_free_result($result);
 	mysqli_close($conn);
-	
 ?>
+
+
+

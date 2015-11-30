@@ -174,7 +174,7 @@
 		<div class="col-sm-9">
 			<div class="input-group">
               <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
-              <input class="form-control" type="text" placeholder="ID Card" id="idcard" name="idcard">
+              <input class="form-control" type="text" placeholder="ID Card" id="idcard" name="idcard" min="0" maxlength="13">
             </div>
 		</div><!-- /col-sm-9 -->
 	</div><!-- /form-group -->

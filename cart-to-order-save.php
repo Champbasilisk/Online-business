@@ -10,8 +10,7 @@
 		echo "No items in cart.";
 	}else{
 		if($_SESSION['mem_id']==""){
-			echo "You are not sign in or not a member. <br><br>
-				<input type='button' value='Please Sign in' class='btn btn-primary'> 
+			echo "You are not sign in or not a member. Please Sign in or<br><br>
 				<a href='#showCusField' class='page-scroll btn btn-info' id='showcusfield'>Purchase without account</a>";
 		}else{
 			$insertOrders = "insert into orders (or_status,or_date,or_sum,mem_id) values('No','$cur_date','$sumTotal','".$_SESSION['mem_id']."')";
